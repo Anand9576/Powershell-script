@@ -1,0 +1,16 @@
+To check list of APIs
+
+# Import the Azure PowerShell module
+Import-Module Az
+
+# Define the name of your API Management service
+$apiManagementServiceName = "YourApiManagementServiceName"
+
+# Get the list of APIs available in the specified API Management service
+$apis = Get-AzApiManagement -ResourceGroupName "YourResourceGroup" -Name $apiManagementServiceName | Get-AzApi
+
+# Write the list of APIs to the console
+Write-Host "Available APIs in Azure API Management service '$apiManagementServiceName':"
+$apis | ForEach-Object {
+    Write-Host $_.Name
+}
