@@ -14,3 +14,27 @@ Write-Host "Available APIs in Azure API Management service '$apiManagementServic
 $apis | ForEach-Object {
     Write-Host $_.Name
 }
+
+
+-----------------------------------------------------------------------------------
+
+Add this 
+Select-AzSubscription 'UEHUB01'
+
+
+# Define your Azure API Management service name, resource group, and product name
+Connect-AzAccount
+$apimServiceName = "uniperapis-dev"
+$resourceGroupName = "APIM-XaaS-HUB-rgp-002"
+$productName = "Demo"
+
+$apimContext = New-AzApiManagementContext -ResourceGroupName $resourceGroupName -ServiceName $apimServiceName
+Get-AzApiManagementProduct -Context $apimContext -ProductId $productName
+
+ $apiObj=Get-AzApiManagementApi -Context $apimContext -ProductId $productName
+
+foreach($APIName in $apiObj)
+{
+   Write-Host $APIName.Name
+    Write-Host $APIName.APIid
+}
